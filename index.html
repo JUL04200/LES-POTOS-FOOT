@@ -1,0 +1,264 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <title>Les Potos Foot - À jour</title>
+  <style>
+    body {
+      background: linear-gradient(to right, #002654, #DA291C);
+      font-family: 'Roboto', sans-serif;
+      background: #0a2540;
+      color: white;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    h1, h2 {
+      color: #3b82f6;
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+    .header img {
+      height: 60px;
+      cursor: pointer;
+    }
+    .tabs, .subtabs {
+      margin-bottom: 10px;
+    }
+    .tabs button, .subtabs button {
+      background: #1d4ed8;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      margin-right: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .tab-content, .subtab-content {
+      display: none;
+    }
+    .tab-content.active, .subtab-content.active {
+      display: block;
+    }
+    .ligue {
+      border: 2px solid #3b82f6;
+      padding: 20px;
+      border-radius: 15px;
+      margin-bottom: 30px;
+    }
+    .admin-panel {
+      display: none;
+      margin-top: 30px;
+      border: 2px dashed #facc15;
+      padding: 15px;
+      border-radius: 10px;
+      background: #1e3a8a;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <img src="logo-les-potos.png" onclick="enableEditingIfAdmin()" alt="Logo Les Potos" onclick="toggleAdmin()" />
+    <h1>Les Potos - Matchs & Classements à jour</h1>
+  </div>
+
+  <div class="tabs">
+    <button onclick="openTab('psg')">🔴🔵 PSG</button>
+    <button onclick="openTab('ligue1')">🇫🇷 Ligue 1</button>
+    <button onclick="openTab('premier')">🏴 Premier League</button>
+    <button onclick="openTab('ucl')">🏆 Ligue des Champions</button>
+  </div>
+
+  <div id="ligue1" class="tab-content active ligue">
+    <div class="subtabs">
+      <button onclick="openSubTab('ligue1', 'classement')">Classement</button>
+      <button onclick="openSubTab('ligue1', 'matchs')">Matchs à venir</button>
+    </div>
+    <div id="ligue1-classement" class="subtab-content active">
+      <p>1. Paris SG – 77 pts<br>2. Marseille – 55 pts<br>3. Monaco – 54 pts<br>4. Lille – 53 pts<br>5. Nice – 51 pts<br>6. Lyon – 51 pts<br>7. Strasbourg – 51 pts<br>8. Lens – 45 pts<br>9. Brest – 44 pts<br>10. Rennes – 38 pts</p>
+    </div>
+    <div id="ligue1-matchs" class="subtab-content">
+      <p>25/04 : Paris SG vs Nice<br>26/04 : Strasbourg vs Saint-Étienne<br>26/04 : Le Havre vs Monaco<br>26/04 : Lyon vs Rennes<br>27/04 : Angers vs Lille<br>27/04 : Lens vs Auxerre<br>27/04 : Nantes vs Toulouse<br>27/04 : Montpellier vs Reims<br>27/04 : Marseille vs Brest</p>
+    </div>
+  </div>
+
+  <div id="premier" class="tab-content ligue">
+    <div class="subtabs">
+      <button onclick="openSubTab('premier', 'classement')">Classement</button>
+      <button onclick="openSubTab('premier', 'matchs')">Matchs à venir</button>
+    </div>
+    <div id="premier-classement" class="subtab-content active">
+      <p>1. Liverpool – 75 pts<br>2. Arsenal – 64 pts<br>3. Manchester City – 58 pts<br>4. Newcastle United – 58 pts<br>5. Nottingham Forest – 60 pts<br>6. Chelsea – 57 pts<br>7. Aston Villa – 57 pts</p>
+    </div>
+    <div id="premier-matchs" class="subtab-content">
+      <p>22/04 : Manchester City vs Aston Villa<br>23/04 : Arsenal vs Crystal Palace<br>26/04 : Chelsea vs Everton<br>26/04 : Newcastle vs Ipswich<br>26/04 : Southampton vs Fulham<br>26/04 : Brighton vs West Ham<br>26/04 : Wolverhampton vs Leicester<br>27/04 : Bournemouth vs Manchester United<br>27/04 : Liverpool vs Tottenham</p>
+    </div>
+  </div>
+
+  
+  <div id="psg" class="tab-content ligue">
+    <div class="subtabs">
+      <button onclick="openSubTab('psg', 'matchs')">Prochains matchs</button>
+      <button onclick="openSubTab('psg', 'actus')">Actus</button>
+    </div>
+    <div id="psg-matchs" class="subtab-content active">
+      <p>25/04 : PSG vs Nice<br>
+         04/05 : Lyon vs PSG<br>
+         12/05 : PSG vs Strasbourg<br>
+         18/05 : Metz vs PSG<br>
+         07/05 : PSG vs Arsenal (Ligue des Champions)</p>
+    </div>
+    <div id="psg-actus" class="subtab-content"><div class="editable">📰 PSG qualifié en demi-finale de LDC après un 5-4 cumulé face à Aston Villa.</div><div class="editable">📰 Luis Enrique : "J’ai le meilleur effectif du monde".</div><div class="editable">📰 PSG en passe de finir invaincu en Ligue 1.</div><div class="editable">📰 Nouveau stade de 80 000 places prévu à Massy.</div><div class="editable">📰 Mbappé reste silencieux sur son avenir.</div>
+      <p>📰 PSG qualifié en demi-finale de LDC après un 5-4 cumulé face à Aston Villa.<br>
+         📰 Luis Enrique : "J’ai le meilleur effectif du monde".<br>
+         📰 PSG en passe de finir invaincu en Ligue 1.<br>
+         📰 Nouveau stade de 80 000 places prévu à Massy.<br>
+         📰 Mbappé reste silencieux sur son avenir.</p>
+      <p>📰 Mbappé confirme son départ à la fin de la saison.<br>
+         📰 Luis Enrique : "L’objectif est le triplé cette saison".<br>
+         📰 Ugarte pressenti titulaire face à Arsenal.<br>
+         📰 Donnarumma annoncé sur les tablettes du Bayern.<br>
+         📰 PSG prépare une offre pour João Neves (Benfica).</p>
+    </div>
+  </div>
+
+
+  <div id="ucl" class="tab-content ligue">
+    <div class="subtabs">
+      <button onclick="openSubTab('ucl', 'matchs')">Matchs à venir</button>
+    </div>
+    <div id="ucl-matchs" class="subtab-content active">
+      <p>29/04 : Arsenal vs Paris SG<br>30/04 : FC Barcelone vs Inter Milan<br>06/05 : Inter Milan vs FC Barcelone<br>07/05 : Paris SG vs Arsenal</p>
+    </div>
+  </div>
+
+  <div id="psg-videos" class="ligue" style="margin-bottom: 30px;">
+    <h2>🎥 Vidéos PSG</h2>
+    <p>
+      <a href="https://www.youtube.com/watch?v=DWZe6u4c-vY" target="_blank">▶️ Résumé Le Havre - PSG (1-4)</a><br> title="Résumé Nantes - PSG" allowfullscreen></iframe><br>
+      <a href="https://www.youtube.com/watch?v=y98VagHYO4o" target="_blank">▶️ Conférence Luis Enrique (avant PSG-Nantes)</a> title="Luis Enrique - Conférence" allowfullscreen></iframe>
+    </p>
+  </div>
+
+  <div class="admin-panel" id="admin-panel">
+    <h2>🔐 Admin</h2>
+    <label for="newsInput">Modifier les actus PSG :</label><br>
+    <textarea id="newsInput" rows="6" cols="50">📰 PSG qualifié en demi-finale de LDC après un 5-4 cumulé face à Aston Villa.
+📰 Luis Enrique : "J’ai le meilleur effectif du monde".
+📰 PSG en passe de finir invaincu en Ligue 1.
+📰 Nouveau stade de 80 000 places prévu à Massy.
+📰 Mbappé reste silencieux sur son avenir.</textarea><br><br>
+    <button onclick="document.getElementById('psg-actus').innerHTML = '<p>' + document.getElementById('newsInput').value.replace(/\n/g, '<br>') + '</p>';">Mettre à jour les actus</button>
+    <h2>🔐 Admin</h2>
+    <p>Ici tu pourras ajouter des infos (fonctionnalité à venir).</p>
+  </div>
+
+  <script>
+    function openTab(id) {
+      document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+    function openSubTab(parentId, subId) {
+      document.querySelectorAll(`#${parentId} .subtab-content`).forEach(st => st.classList.remove('active'));
+      document.getElementById(`${parentId}-${subId}`).classList.add('active');
+    }
+    function toggleAdmin() {
+      const password = prompt("Mot de passe admin :");
+      if (password === "julesjohntom") {
+        document.getElementById("admin-panel").style.display = "block";
+      } else {
+        alert("Mot de passe incorrect.");
+      }
+    }
+  </script>
+
+    <script>
+      document.querySelectorAll("#psg-actus p").forEach(p => {
+        const container = document.createElement('div');
+        container.style.position = 'relative';
+        container.style.paddingBottom = '5px';
+        container.innerHTML = `<div contenteditable='true' style='background:#0f172a;padding:10px;border-radius:5px;margin-bottom:5px;'>${p.innerHTML}</div>
+          <button onclick='this.parentNode.remove()' style='margin-top:5px;background:#dc2626;border:none;padding:5px 10px;color:white;border-radius:5px;cursor:pointer;'>Supprimer</button>`;
+        p.replaceWith(container);
+      });
+    </script>
+    
+    <script>
+      document.querySelectorAll("#ligue1-matchs p").forEach(p => {
+        const container = document.createElement('div');
+        container.style.position = 'relative';
+        container.style.paddingBottom = '5px';
+        container.innerHTML = `<div contenteditable='true' style='background:#0f172a;padding:10px;border-radius:5px;margin-bottom:5px;'>${p.innerHTML}</div>
+          <button onclick='this.parentNode.remove()' style='margin-top:5px;background:#dc2626;border:none;padding:5px 10px;color:white;border-radius:5px;cursor:pointer;'>Supprimer</button>`;
+        p.replaceWith(container);
+      });
+    </script>
+    
+    <script>
+      document.querySelectorAll("#ligue1-classement p").forEach(p => {
+        const container = document.createElement('div');
+        container.style.position = 'relative';
+        container.style.paddingBottom = '5px';
+        container.innerHTML = `<div contenteditable='true' style='background:#0f172a;padding:10px;border-radius:5px;margin-bottom:5px;'>${p.innerHTML}</div>
+          <button onclick='this.parentNode.remove()' style='margin-top:5px;background:#dc2626;border:none;padding:5px 10px;color:white;border-radius:5px;cursor:pointer;'>Supprimer</button>`;
+        p.replaceWith(container);
+      });
+    </script>
+    
+    <script>
+      document.querySelectorAll("#premier-matchs p").forEach(p => {
+        const container = document.createElement('div');
+        container.style.position = 'relative';
+        container.style.paddingBottom = '5px';
+        container.innerHTML = `<div contenteditable='true' style='background:#0f172a;padding:10px;border-radius:5px;margin-bottom:5px;'>${p.innerHTML}</div>
+          <button onclick='this.parentNode.remove()' style='margin-top:5px;background:#dc2626;border:none;padding:5px 10px;color:white;border-radius:5px;cursor:pointer;'>Supprimer</button>`;
+        p.replaceWith(container);
+      });
+    </script>
+    
+    <script>
+      document.querySelectorAll("#premier-classement p").forEach(p => {
+        const container = document.createElement('div');
+        container.style.position = 'relative';
+        container.style.paddingBottom = '5px';
+        container.innerHTML = `<div contenteditable='true' style='background:#0f172a;padding:10px;border-radius:5px;margin-bottom:5px;'>${p.innerHTML}</div>
+          <button onclick='this.parentNode.remove()' style='margin-top:5px;background:#dc2626;border:none;padding:5px 10px;color:white;border-radius:5px;cursor:pointer;'>Supprimer</button>`;
+        p.replaceWith(container);
+      });
+    </script>
+    
+    <script>
+      document.querySelectorAll("#ucl-matchs p").forEach(p => {
+        const container = document.createElement('div');
+        container.style.position = 'relative';
+        container.style.paddingBottom = '5px';
+        container.innerHTML = `<div contenteditable='true' style='background:#0f172a;padding:10px;border-radius:5px;margin-bottom:5px;'>${p.innerHTML}</div>
+          <button onclick='this.parentNode.remove()' style='margin-top:5px;background:#dc2626;border:none;padding:5px 10px;color:white;border-radius:5px;cursor:pointer;'>Supprimer</button>`;
+        p.replaceWith(container);
+      });
+    </script>
+    
+<script>
+  function enableEditingIfAdmin() {
+    const password = prompt("Mot de passe admin :");
+    if (password === "julesjohntom") {
+      document.querySelectorAll(".editable").forEach(p => {
+        p.setAttribute("contenteditable", "true");
+        const btn = document.createElement("button");
+        btn.innerText = "❌ Supprimer";
+        btn.style = "margin-left: 10px; background: red; color: white; border: none; padding: 2px 6px; cursor: pointer;";
+        btn.onclick = () => p.remove();
+        p.appendChild(btn);
+      });
+    } else {
+      alert("Mot de passe incorrect.");
+    }
+  }
+</script>
+</body>
+</html>
