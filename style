@@ -1,0 +1,46 @@
+/* Style global */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #0d1b2a;
+  color: white;
+  padding: 20px;
+}
+
+/* Logo */
+.logo {
+  max-width: 80px;
+  display: block;
+  margin: 0 auto 10px auto;
+}
+
+/* Titre */
+h1 {
+  text-align: center;
+  font-size: 2rem;
+  color: #4f8ef7;
+}
+
+/* Boutons */
+button {
+  padding: 12px;
+  font-size: 1rem;
+  background-color: #4f8ef7;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  margin: 5px;
+  width: 100%;
+}
+
+/* Responsive pour mobile */
+@media (max-width: 600px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  button {
+    font-size: 1rem;
+    padding: 10px;
+  }
+}
